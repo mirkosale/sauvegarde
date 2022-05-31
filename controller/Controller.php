@@ -5,6 +5,8 @@
  * Contrôleur principal
  */
 
+include_once 'model/database.php';
+
 abstract class Controller {
 
     /**

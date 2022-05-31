@@ -12,8 +12,8 @@ $debug = false;
 if ($debug) {
     error_reporting(E_ALL);
     ini_set('display_errors', '1');
-
 }
+
 date_default_timezone_set('Europe/Zurich');
 
 include_once 'controller/Controller.php';
@@ -29,8 +29,8 @@ class MainController {
     public function dispatch() {
 
         if (!isset($_GET['controller'])) {
-            $_GET['controller'] = 'customer';
-            $_GET['action'] = 'list';
+            $_GET['controller'] = 'home';
+            $_GET['action'] = 'index';
         }
 
 
@@ -49,9 +49,6 @@ class MainController {
         switch($_GET['controller']){
             case 'home':
                 $link = new HomeController();
-                break;
-            case 'customer':
-                $link = new CustomerController();
                 break;
             default:
                 $link = new HomeController();
