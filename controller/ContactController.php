@@ -51,26 +51,29 @@ class ContactController extends Controller {
         if (isset($_POST['btnSubmit'])) {
 
             $errors = array();
-            $recipeData = array();
 
             $database = new Database();
+
+            #Récupération et filtrage de toutes les informations entrées dans la page de contact
             $name = trim(htmlspecialchars($_POST["name"]));
             $email = trim(htmlspecialchars($_POST["email"]));
-            $address = trim(htmlspecialchars($_POST["address"]));
             $phoneNumber = trim(htmlspecialchars($_POST["phoneNumber"]));
             $message = trim(htmlspecialchars($_POST["message"]));
 
-            #Check de si toutes les informations entrées ne sont pas vide
+            #Check de si toutes les informations entrées ne sont pas vides
             if (!isset($name) || empty($name)) {
                 $errors[] = "Vous devez entrer un nom";
             }
+
             if (!isset($email) || empty($email)) {
                 $errors[] = "Vous devez entrer un email";
             }
 
-            #Check de si le numéro de téléphone contient uniquement des bons symboles et est au moins de 5 de long
-            if (isset($phoneNumber) && !empty($phoneNumber) && !preg_match("/^[0-9+-]{5,}$/", $phoneNumber)) {
-                $errors[] = "Vous devez entrer un numéro de téléphone qui fait au minimum 5 de longueur avec uniquement des chiffres et des +, / et -";
+            #Check de si le numéro de téléphone contient uniquement des bons symboles et est au moins de 3 de long et qu'il ne soit pas plus long que 20 caractères
+            if (isset($phoneNumber) && !empty($phoneNumber) && !preg_match("/^[+]{0,1}[0-9-()]{3,19}$/", $phoneNumber)) {
+                $errors[] 
+                
+                = "Vous devez entrer un numéro de téléphone qui fait au minimum 5 de longueur avec uniquement des chiffres et des +, / et -";
             }
             if (!isset($message) || empty($message)) {
                 $errors[] = "Vous devez entrer un message";
@@ -80,7 +83,6 @@ class ContactController extends Controller {
             if (empty($errors)) {
                 $recipeData["name"] = $name;
                 $recipeData["email"] = $email;
-                $recipeData["address"] = $address;
                 $recipeData["phoneNumber"] = $phoneNumber;
                 $recipeData["message"] = $message;
 
