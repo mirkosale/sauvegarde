@@ -37,4 +37,37 @@ class HomeController extends Controller {
 
         return $content;
     }
+
+    /**
+     * Display Index Action
+     *
+     * @return string
+     */
+    private function aboutAction() {
+
+        $view = file_get_contents('view/page/home/about.php');
+
+        ob_start();
+        eval('?>' . $view);
+        $content = ob_get_clean();
+
+        return $content;
+    }
+
+    /**
+     * Display Index Action
+     *
+     * @return string
+     */
+    private function postAction() {
+
+        $view = file_get_contents('view/page/home/post.php');
+
+        ob_start();
+        eval('?>' . $view);
+        $content = ob_get_clean();
+
+        return $content;
+    }
 }
+

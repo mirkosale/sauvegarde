@@ -30,8 +30,7 @@ class ContactController extends Controller {
      */
     private function contactAction() {
 
-        $view = file_get_contents('view/page/contact/contactPage.php');
-
+        $view = file_get_contents('view/page/contact/contact.php');
 
         ob_start();
         eval('?>' . $view);
@@ -40,7 +39,7 @@ class ContactController extends Controller {
         return $content;
     }
 
-        /**
+    /**
      * Check Form action
      *
      * @return string

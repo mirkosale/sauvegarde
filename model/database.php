@@ -71,7 +71,7 @@ class Database
     }
 
     /**
-     * Méthode permettant de récupèrer tout les recettes
+     * Méthode permettant de récupèrer toutes les informations de contact remplies
      */
     public function getAllRecipe()
     {
@@ -86,25 +86,22 @@ class Database
 
     /**
      * Méthode permettant d'ajouter un recette à la base de données selon informations
-     * récupérees dans le formulaire d'ajout
+     * récupérees dans le formulaire de contact et d'envoi de données
      */
-    public function InsertRecipe($recipeData)
+    public function insertContact($contactData)
     {
-        $query = "INSERT INTO t_recipe (recName, fkTypeDish, recListOfItems, recPreparation, recImage) 
-                  VALUES (:name, :typedish, :itemList, :preparation, :image)";
+        $query = "INSERT INTO t_contact (conName, conEmail, conMessage) 
+                  VALUES (:conName, :conEmail, :conMessage)";
 
         $binds = [
-            ["name" => 'name', 'value' => $recipeData['name'], 'type' => PDO::PARAM_STR],
-            ["name" => 'itemList', 'value' => $recipeData['itemList'], 'type' => PDO::PARAM_STR],
-            ["name" => 'preparation', 'value' => $recipeData['preparation'], 'type' => PDO::PARAM_STR],
-            ["name" => 'image', 'value' => $recipeData['image'], 'type' => PDO::PARAM_LOB],
-            ["name" => 'typedish', 'value' => $recipeData['typedish'], 'type' => PDO::PARAM_INT]
+            ["name" => 'conName', 'value' => $contactData['name'], 'type' => PDO::PARAM_STR],
+            ["name" => 'conEmail', 'value' => $contactData['email'], 'type' => PDO::PARAM_STR],
+            ["name" => 'conMessage', 'value' => $contactData['message'], 'type' => PDO::PARAM_STR]
         ];
 
         $req = $this->queryPrepareExecute($query, $binds);
         $this->unsetData($req);
     }
-
 }
 
 ?>
