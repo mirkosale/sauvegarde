@@ -41,15 +41,15 @@
     <!-- Core theme JS-->
     <script src="./resources/bootstrap/js/scripts.js"></script>
 
-<?php
-    require_once('/resources/vendor/autoload.php');
+    <?php
+    require_once("./resources/vendor/autoload.php");
 
     // Configure API key authorization: api-key
-    $config = \SendinBlue\Client\Configuration::getDefaultConfiguration()->setApiKey('api-key', 'YOUR_API_KEY');
+    $config = SendinBlue\Client\Configuration::getDefaultConfiguration()->setApiKey('api-key', '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');
     // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
     // $config = SendinBlue\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('api-key', 'Bearer');
     // Configure API key authorization: partner-key
-    $config = SendinBlue\Client\Configuration::getDefaultConfiguration()->setApiKey('partner-key', 'YOUR_API_KEY');
+    $config = SendinBlue\Client\Configuration::getDefaultConfiguration()->setApiKey('partner-key', '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');
     // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
     // $config = SendinBlue\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('partner-key', 'Bearer');
 
