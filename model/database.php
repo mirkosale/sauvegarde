@@ -1,11 +1,3 @@
-<!--
-ETML 
-Author : Kandasamy Pruthvin, Tim Froidevaux, Dylan Bontems, Mirko Sale
-Date   : 28.02.2022
-Description: les données sont traitées et affichées directement dans la page d’accueil.
- Mais, nous allons créer plusieurs pages avec des liaisons à la BD. A terme, nous ne voulons pas recopier toujours les mêmes instructions.
- De ce fait, nous allons créer une classe afin de regrouper les méthodes nécessaires à nos requêtes.
--->
 <?php
 
 class Database
@@ -89,6 +81,26 @@ class Database
      * récupérees dans le formulaire de contact et d'envoi de données
      */
     public function insertContact($contactData)
+    {
+        $query = "INSERT INTO t_contact (conName, conEmail, conPhoneNumber, conMessage) 
+                  VALUES (:conName, :conEmail, :conPhoneNumber, :conMessage)";
+
+        $binds = [
+            ["name" => 'conName', 'value' => $contactData['name'], 'type' => PDO::PARAM_STR],
+            ["name" => 'conEmail', 'value' => $contactData['email'], 'type' => PDO::PARAM_STR],
+            ["name" => 'conPhoneNumber', 'value' => $contactData['phone'], 'type' => PDO::PARAM_STR],
+            ["name" => 'conMessage', 'value' => $contactData['message'], 'type' => PDO::PARAM_STR]
+        ];
+
+        $req = $this->queryPrepareExecute($query, $binds);
+        $this->unsetData($req);
+    }
+
+    /**
+     * Méthode permettant d'ajouter un recette à la base de données selon informations
+     * récupérees dans le formulaire de contact et d'envoi de données
+     */
+    public function insertContactNoPhone($contactData)
     {
         $query = "INSERT INTO t_contact (conName, conEmail, conMessage) 
                   VALUES (:conName, :conEmail, :conMessage)";

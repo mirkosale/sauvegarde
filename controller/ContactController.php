@@ -45,13 +45,10 @@ class ContactController extends Controller {
      * @return string
      */
     private function checkContactAction() {
-
         //Vérification de si l'utilisateur a bel et bien utilisé le formulaire pour accéder à la page
         if (isset($_POST['btnSubmit'])) {
 
             $errors = array();
-
-            $database = new Database();
 
             #Récupération et filtrage de toutes les informations entrées dans la page de contact
             $name = trim(htmlspecialchars($_POST["name"]));
@@ -70,9 +67,7 @@ class ContactController extends Controller {
 
             #Check de si le numéro de téléphone contient uniquement des bons symboles et est au moins de 3 de long et qu'il ne soit pas plus long que 20 caractères
             if (isset($phoneNumber) && !empty($phoneNumber) && !preg_match("/^[+]{0,1}[0-9-()]{3,19}$/", $phoneNumber)) {
-                $errors[] 
-                
-                = "Vous devez entrer un numéro de téléphone qui fait au minimum 5 de longueur avec uniquement des chiffres et des +, / et -";
+                $errors[] = "Vous devez entrer un numéro de téléphone qui fait au minimum 5 de longueur avec uniquement des chiffres et des +, / et -";
             }
             if (!isset($message) || empty($message)) {
                 $errors[] = "Vous devez entrer un message";
@@ -80,17 +75,30 @@ class ContactController extends Controller {
 
             #Retour à l'accueil si aucune erreur
             if (empty($errors)) {
-                $recipeData["name"] = $name;
-                $recipeData["email"] = $email;
-                $recipeData["phoneNumber"] = $phoneNumber;
-                $recipeData["message"] = $message;
+                $contactData["name"] = $name;
+                $contactData["email"] = $email;
+                $contactData["message"] = $message;
+
+                $db = new Database();
+
+                #Check de si l'utilisateur a rentré un numéro de téléphone ou non
+                if (!isset($phoneNumber) || empty($phoneNumber))
+                {
+                    $db->insertContactNoPhone($contactData);
+                }
+                else
+                {
+                    $contactData["phone"] = $phoneNumber;
+
+                    $db->insertContact($contactData);
+                }
 
                 $view = file_get_contents('view/page/home/index.php');
             } else {
-                $view = file_get_contents('view/page/home/errors.php');
+                $view = file_get_contents('view/page/contact/errors.php');
             }
         } else {
-            $view = file_get_contents('view/page/home/noSubmit.php');
+            $view = file_get_contents('view/page/contact/noSubmit.php');
         }
 
         ob_start();
