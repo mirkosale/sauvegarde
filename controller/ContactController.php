@@ -7,6 +7,7 @@
  */
 
 include_once 'model/database.php';
+include_once 'model/configSMTP.php';
 
 class ContactController extends Controller {
 

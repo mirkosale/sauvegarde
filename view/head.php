@@ -20,12 +20,9 @@
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 
     <!-- Google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet"
-        type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
 
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
-        rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
 
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="./resources/bootstrap/css/styles.css" rel="stylesheet" />
@@ -37,34 +34,7 @@
 
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <!-- Core theme JS-->
     <script src="./resources/bootstrap/js/scripts.js"></script>
-
-    <?php
-    require_once("./resources/vendor/autoload.php");
-
-    // Configure API key authorization: api-key
-    $config = SendinBlue\Client\Configuration::getDefaultConfiguration()->setApiKey('api-key', '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');
-    // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-    // $config = SendinBlue\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('api-key', 'Bearer');
-    // Configure API key authorization: partner-key
-    $config = SendinBlue\Client\Configuration::getDefaultConfiguration()->setApiKey('partner-key', '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');
-    // Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-    // $config = SendinBlue\Client\Configuration::getDefaultConfiguration()->setApiKeyPrefix('partner-key', 'Bearer');
-
-    $apiInstance = new SendinBlue\Client\Api\AccountApi(
-        // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-        // This is optional, `GuzzleHttp\Client` will be used as default.
-        new GuzzleHttp\Client(),
-        $config
-    );
-
-    try {
-        $result = $apiInstance->getAccount();
-        print_r($result);
-    } catch (Exception $e) {
-        echo 'Exception when calling AccountApi->getAccount: ', $e->getMessage(), PHP_EOL;
-    }
-?>
 </head>
