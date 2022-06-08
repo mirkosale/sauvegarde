@@ -54,7 +54,7 @@ class ContactController extends Controller {
             #Récupération et filtrage de toutes les informations entrées dans la page de contact
             $name = trim(htmlspecialchars($_POST["name"]));
             $email = trim(htmlspecialchars($_POST["email"]));
-            $phoneNumber = trim(htmlspecialchars($_POST["phoneNumber"]));
+            $phoneNumber = trim(htmlspecialchars($_POST["phone"]));
             $message = trim(htmlspecialchars($_POST["message"]));
 
             #Check de si toutes les informations entrées ne sont pas vides
