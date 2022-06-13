@@ -82,6 +82,12 @@ class ContactController extends Controller {
 
                 $db = new Database();
 
+                $content = "<h2>Retour contact Sauvegarde $name</h2>";
+                $content .= "<p>Bonjour, ceci est un email pour vous informer que vos informations ont bien été reçues et transférées au gestionnaire du site.
+                <br>Vos informations entrées sont les suivantes : </p>";
+                $content .= "<br><p>Nom : $name</p>";
+                $content .= "<p>Adresse email : $email</p>";
+
                 #Check de si l'utilisateur a rentré un numéro de téléphone ou non
                 if (!isset($phoneNumber) || empty($phoneNumber))
                 {
@@ -90,9 +96,32 @@ class ContactController extends Controller {
                 else
                 {
                     $contactData["phone"] = $phoneNumber;
-
                     $db->insertContact($contactData);
+
+                    $content .= "<p>Numéro de téléphone : $phoneNumber</p>";
                 }
+                $content .= "<p>Message : $message</p>";
+                
+                include('./model/configSMTP.php');
+
+                $emailOwner = new \SendinBlue\Client\Model\SendSmtpEmail();
+                $emailOwner['subject'] = "Retour contact Sauvegarde";
+                $emailOwner['htmlContent'] = "$content";
+                $emailOwner['sender'] = array('name' => "$from_name", 'email' => "$from_email");
+                $emailOwner['to'] = array(
+                array('email' => "$email", 'name' => "$name")
+                );
+               
+                $emailClient = new \SendinBlue\Client\Model\SendSmtpEmail();
+                $emailClient['subject'] = "Retour contact $name";
+                $emailClient['htmlContent'] = "$content";
+                $emailClient['sender'] = array('name' => "$from_name", 'email' => "$from_email");
+                $emailClient['to'] = array(
+                array('email' => "$to_email", 'name' => "$to_email")
+                );
+
+                $apiInstance->sendTransacEmail($emailOwner);
+                $apiInstance->sendTransacEmail($emailClient);
 
                 $view = file_get_contents('view/page/home/index.php');
             } else {
