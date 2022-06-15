@@ -10,7 +10,7 @@ class Database
      */
     public function __construct()
     {
-        include('configDB.php');
+    include('configDB.php');
 
         try {
             $this->connector = new PDO("mysql:host=$DB_SERVER;dbname=$DB_NAME;charset=utf8", $DB_USER, $DB_PASSWORD);
@@ -77,7 +77,7 @@ class Database
     }
 
     /**
-     * Méthode permettant d'ajouter un recette à la base de données selon informations
+     * Méthode permettant d'ajouter des données à la base de données selon informations
      * récupérees dans le formulaire de contact et d'envoi de données
      */
     public function insertContact($contactData)
@@ -97,7 +97,7 @@ class Database
     }
 
     /**
-     * Méthode permettant d'ajouter un recette à la base de données selon informations
+     * Méthode permettant d'ajouter des données à la base de données selon informations
      * récupérees dans le formulaire de contact et d'envoi de données
      */
     public function insertContactNoPhone($contactData)

@@ -8,7 +8,7 @@
 
 include_once 'model/database.php';
 
-class ListController extends Controller {
+class InfoController extends Controller {
 
     /**
      * Permet de choisir l'action à effectuer
