@@ -65,14 +65,30 @@ class Database
     /**
      * Méthode permettant de récupèrer toutes les informations de contact remplies
      */
-    public function getAllRecipe()
+    public function getAllInfo()
     {
-        $queryRecipe = "SELECT *  FROM t_contact";
+        $queryRecipe = "SELECT idInfo, infName, infDescription FROM t_info";
 
         $reqRecipe = $this->querySimpleExecute($queryRecipe);
 
         $returnRecipe = $this->formatData($reqRecipe);
 
+        return $returnRecipe;
+    }
+
+    /**
+     * Méthode permettant de récupèrer une information selon l'ID de cette dernière
+     */
+    public function getOneInfo($id)
+    {
+        $queryOneRecipe
+            = "SELECT * FROM t_info WHERE idInfo = :varId";
+        $bindRecipe = array(
+            array("name" => "varId", "value" => $id, "type" => PDO::PARAM_INT)
+        );
+        $reqRecipe = $this->queryPrepareExecute($queryOneRecipe, $bindRecipe);
+        $returnRecipe = $this->formatData($reqRecipe);
+        $this->unsetData($reqRecipe);
         return $returnRecipe;
     }
 
@@ -114,6 +130,8 @@ class Database
         $req = $this->queryPrepareExecute($query, $binds);
         $this->unsetData($req);
     }
+
+    
 }
 
 ?>

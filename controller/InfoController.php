@@ -27,8 +27,10 @@ class InfoController extends Controller {
      * Display Contact Action
      *
      * @return string
-     */
+     */    
     private function listAction() {
+        $db = new Database();
+        $infos = $db->getAllInfo();
 
         $view = file_get_contents('view/page/info/list.php');
 
@@ -39,21 +41,36 @@ class InfoController extends Controller {
         return $content;
     }
 
-    /**
-     * Display Contact Action
-     *
-     * @return string
-     */
-    private function displayAction() {
+    private function detailAction()
+    {
+        #Check si l'ID de la recette a été mis
+        if (!isset($_GET['id'])) {
+            $view = file_get_contents('view/page/info/detail.php');
+        }
 
-        $view = file_get_contents('view/page/contact/contact.php');
+        #Check si la recette avec l'ID correspondant existe
+        if (isset($_GET['id'])) {
+            $db = new Database();
+            $info = $db->getOneInfo($_GET['id']);;
+
+            if (!isset($info[0])) {
+                $view = file_get_contents('view/page/info/detail.php');
+            }
+        }
+
+        #Affichage de la page de détail si pas d'erreur
+        if (!isset($view)) {
+            $view = file_get_contents('view/page/recipe/detail.php');
+        }
 
         ob_start();
         eval('?>' . $view);
+
         $content = ob_get_clean();
 
         return $content;
     }
+    
 }
 
 ?>
