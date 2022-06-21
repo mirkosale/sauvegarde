@@ -67,7 +67,7 @@ class ContactController extends Controller {
             }
 
             #Check de si le numéro de téléphone contient uniquement des bons symboles et est au moins de 3 de long et qu'il ne soit pas plus long que 20 caractères
-            if (isset($phoneNumber) && !empty($phoneNumber) && !preg_match("/^[+]{0,1}[0-9-()]{3,19}$/", $phoneNumber)) {
+            if (isset($phoneNumber) && !empty($phoneNumber) && !preg_match("/^[+]{0,1}[0-9-() ]{3,19}$/", $phoneNumber)) {
                 $errors[] = "Vous devez entrer un numéro de téléphone qui fait au minimum 5 de longueur avec uniquement des chiffres et des +, / et -";
             }
             if (!isset($message) || empty($message)) {
