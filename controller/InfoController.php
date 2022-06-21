@@ -45,7 +45,7 @@ class InfoController extends Controller {
     {
         #Check si l'ID de la recette a été mis
         if (!isset($_GET['id'])) {
-            $view = file_get_contents('view/page/info/detail.php');
+            $view = file_get_contents('view/page/info/badInfo.php');
         }
 
         #Check si la recette avec l'ID correspondant existe
@@ -54,13 +54,13 @@ class InfoController extends Controller {
             $info = $db->getOneInfo($_GET['id']);;
 
             if (!isset($info[0])) {
-                $view = file_get_contents('view/page/info/detail.php');
+                $view = file_get_contents('view/page/info/badInfo.php');
             }
         }
 
         #Affichage de la page de détail si pas d'erreur
         if (!isset($view)) {
-            $view = file_get_contents('view/page/recipe/detail.php');
+            $view = file_get_contents('view/page/info/detail.php');
         }
 
         ob_start();
